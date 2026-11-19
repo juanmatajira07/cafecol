@@ -8,12 +8,12 @@ Descripción: TU DESCRIPCIÓN AQUÍ (2 o 3 líneas: qué hace este programa)
 """
 
 NOMBRE_TOSTADORA = "CaféCode · Tostadora de Café"
-ANCHO = 40
+ANCHO_RECIBO = 40
 PRECIO_LIBRA_ESPECIAL = 38000     # pesos por libra
 PRECIO_LIBRA_TRADICIONAL = 26000
 PORCENTAJE_DESCUENTO = 0.05       # descuento de temporada: 5 %
 LIBRAS_TABLA = 5                  # filas de la tabla de precios
-
+GRAMOS_POR_LIBRA=500
 PUNTAJE_MINIMO = 0
 PUNTAJE_MAXIMO = 100
 PUNTAJE_EXCEPCIONAL = 90
@@ -36,9 +36,9 @@ lotes_especiales = 0 # (contador: puntaje de 80 o más)
 opcion = ""
 while opcion != "0":
     print()
-    print("=" * ANCHO)
-    print(f"{NOMBRE_TOSTADORA:^{ANCHO}}")
-    print("=" * ANCHO)
+    print("=" * ANCHO_RECIBO)
+    print(f"{NOMBRE_TOSTADORA:^{ANCHO_RECIBO}}")
+    print("=" * ANCHO_RECIBO)
     print("1. Registrar venta")
     print("2. Clasificar lote")
     print("3. Tabla de precios")
@@ -48,26 +48,61 @@ while opcion != "0":
 
     match opcion:
         case "1":
-            # ---------- PARTE D · REGISTRAR VENTA ----------
-            # El nombre ya está resuelto: es el patrón «leer, revisar
-            # con while, volver a leer». Úsalo para las dos cantidades:
-            #   texto = input("Libras de café especial: ").strip()
-            #   texto = texto.replace(",", ".")
-            #   mientras NO sea número positivo: muestra el error
-            #   «  Error: escribe un número positivo, ej. 2,5.» y
-            #   vuelve a leer. Al salir del while, convierte con float().
-            # Si las dos cantidades suman 0: imprime
-            #   «La venta no tiene café. No se registró.» y usa continue.
-            # Calcula subtotal, descuento y total como en ventas.py,
-            # suma al contador y a los dos acumuladores, y muestra
-            # Cliente, Libras, Total a pagar y «Venta n.° N registrada.»
             nombre_cliente = input("Nombre del cliente: ").strip()
-            #while nombre_cliente == "":
-            #    print("  Error: el nombre no puede estar vacío.")
-            #    nombre_cliente = input("Nombre del cliente: ").strip()
-            # TU CÓDIGO AQUÍ
+            while nombre_cliente == "":
+                print("  Error: el nombre no puede estar vacío.")
+                nombre_cliente = input("Nombre del cliente: ").strip()
+            texto = input("Libras de café especial: ").strip()
+            texto = texto.replace(",", ".")
+            while not texto.replace(".", "",1).isdigit():
+                print(" Error: escribe un número positivo, ej. 2,5.")
+                texto = input("Libras de café especial: " ).strip()
+                texto = texto.replace(",", ".")
+            libras_especial = float(texto)
+            texto = input("Libras de café tradicional: ").strip()
+            texto = texto.replace(",", ".")
+            while not texto.replace(".", "",1).isdigit():
+                print(" Error: escribe un número positivo, ej. 2,5.")
+                texto = input("Libras de café tradicional: " ).strip()
+                texto = texto.replace(",", ".")
+            libras_tradicional = float(texto)
+            subtotal_especial = libras_especial * PRECIO_LIBRA_ESPECIAL
+            subtotal_tradicional = libras_tradicional * PRECIO_LIBRA_TRADICIONAL
+            subtotal = subtotal_especial + subtotal_tradicional
+            descuento = subtotal * PORCENTAJE_DESCUENTO
+            total = subtotal - descuento
+            total_libras = libras_especial + libras_tradicional
+            total_gramos = total_libras * GRAMOS_POR_LIBRA
+            if total_libras == 0:
+                print("La venta no tiene café. No se registró")
+                continue
+            print("=" * ANCHO_RECIBO)
+            print(f"{NOMBRE_TOSTADORA:^{ANCHO_RECIBO}}")
+            print("=" * ANCHO_RECIBO)
+            print(f"Cliente: {nombre_cliente}")
 
-            #print("Registrar venta: en construcción")
+            especial_txt = f"${subtotal_especial:,.0f}".replace(",", ".")
+            lb_especial_txt = f"{libras_especial:.1f}".replace(".", ",")
+            tradicional_txt = f"${subtotal_tradicional:,.0f}".replace(",", ".")
+            lb_tradicional_txt = f"{libras_tradicional:.1f}".replace(".", ",")
+            subtotal_txt = f"${subtotal:,.0f}".replace(",", ".")
+            etiqueta_descuento = "Descuento (5%)"
+            descuento_txt = f"-${descuento:,.0f}".replace(",", ".")
+            total_txt = f"${total:,.0f}".replace(",", ".")
+            lb_total_txt = f"{total_libras:.1f}".replace(",", ".")
+            gramos_txt = f"{total_gramos:,.0f}".replace(",", ".")
+            print("-" * ANCHO_RECIBO)
+            print(f"{'Producto':<18}{"Libras":>8}{"Valor":>14}")
+            print(f"{'Café especial':<18}{lb_especial_txt:>8}{especial_txt:>14}")
+            print(f"{'Café tradicional':<18}{lb_tradicional_txt:>8}{tradicional_txt:>14}")
+            print("-"*ANCHO_RECIBO)
+            print(f"{'Subtotal':<26}{subtotal_txt:>14}")
+            print(f"{etiqueta_descuento:<26}{descuento_txt:>14}")
+            print(f"{'TOTAL A PAGAR:':<26}{total_txt:>14}")
+            print("-"*ANCHO_RECIBO)
+            print(f"Café entregado: {lb_total_txt} lb ({gramos_txt} g)")
+            print("="*ANCHO_RECIBO)
+            print('¡Gracias por apoyar el café de Caldas!')
 
         case "2":
             # ---------- PARTE E · CLASIFICAR LOTE ----------
