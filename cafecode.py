@@ -7,27 +7,13 @@ Versión: 0.4
 Descripción: TU DESCRIPCIÓN AQUÍ (2 o 3 líneas: qué hace este programa)
 """
 
-# =====================================================================
-# RETO DE CICLOS · CaféCode v0.4 · Menú principal
-# Lee el enunciado completo antes de empezar. Trabaja parte por parte,
-# ejecuta después de cada una (py cafecode.py) y haz un commit al
-# terminar cada parte. Borra cada «# TU CÓDIGO AQUÍ» cuando lo resuelvas.
-# Este archivo ya se puede ejecutar: las opciones dicen «en construcción».
-# =====================================================================
-
-# ---------------------------------------------------------------------
-# 1. CONSTANTES (ya están: vienen de ventas.py y clasificacion.py)
-# ---------------------------------------------------------------------
 NOMBRE_TOSTADORA = "CaféCode · Tostadora de Café"
 ANCHO = 40
-
-# Ventas (semana 2)
 PRECIO_LIBRA_ESPECIAL = 38000     # pesos por libra
 PRECIO_LIBRA_TRADICIONAL = 26000
 PORCENTAJE_DESCUENTO = 0.05       # descuento de temporada: 5 %
 LIBRAS_TABLA = 5                  # filas de la tabla de precios
 
-# Clasificación (semana 3)
 PUNTAJE_MINIMO = 0
 PUNTAJE_MAXIMO = 100
 PUNTAJE_EXCEPCIONAL = 90
@@ -41,29 +27,12 @@ PRECIO_EXCELENTE = 45000
 PRECIO_ESPECIAL = 38000
 PRECIO_COMERCIAL = 26000
 
-# ---------------------------------------------------------------------
-# 2. ACUMULADORES DEL DÍA · PARTE B
-# Crea, ANTES del ciclo, las cinco variables que guardan el día:
-#   ventas_registradas -> 0      (contador)
-#   total_vendido      -> 0      (acumulador de pesos)
-#   libras_vendidas    -> 0.0    (acumulador de libras)
-#   lotes_clasificados -> 0      (contador)
-#   lotes_especiales   -> 0      (contador: puntaje de 80 o más)
-# ---------------------------------------------------------------------
-# TU CÓDIGO AQUÍ
 ventas_registradas = 0 # (contador)
 total_vendido = 0 # (acumulador de pesos)
 libras_vendidas = 0.0 # (acumulador de libras)
 lotes_clasificados = 0 # (contador)
 lotes_especiales = 0 # (contador: puntaje de 80 o más)
 
-# ---------------------------------------------------------------------
-# 3. MENÚ PRINCIPAL · PARTE C
-# El ciclo ya está: se repite mientras la opción sea distinta de "0".
-# Al final del match agrega:
-#   case "0": imprime "Cerrando CaféCode..."
-#   case _:   imprime "Opción no válida. Elige un número del menú."
-# ---------------------------------------------------------------------
 opcion = ""
 while opcion != "0":
     print()
@@ -93,11 +62,12 @@ while opcion != "0":
             # suma al contador y a los dos acumuladores, y muestra
             # Cliente, Libras, Total a pagar y «Venta n.° N registrada.»
             nombre_cliente = input("Nombre del cliente: ").strip()
-            while nombre_cliente == "":
-                print("  Error: el nombre no puede estar vacío.")
-                nombre_cliente = input("Nombre del cliente: ").strip()
+            #while nombre_cliente == "":
+            #    print("  Error: el nombre no puede estar vacío.")
+            #    nombre_cliente = input("Nombre del cliente: ").strip()
             # TU CÓDIGO AQUÍ
-            print("Registrar venta: en construcción")
+
+            #print("Registrar venta: en construcción")
 
         case "2":
             # ---------- PARTE E · CLASIFICAR LOTE ----------
@@ -148,7 +118,10 @@ while opcion != "0":
             print("Resumen del día: en construcción")
 
         # TU CÓDIGO AQUÍ: case "0" y case _ (PARTE C)
-
+        case "0":
+            print("Cerrando CaféCode...")
+        case _:
+            print("Opción no válida. Elige un número del menú.")
 # ---------------------------------------------------------------------
 # 4. CIERRE · PARTE G (se ejecuta una sola vez, al salir del ciclo)
 # Muestra «Ventas del día: N · Total: $X» y «¡Hasta pronto!»
