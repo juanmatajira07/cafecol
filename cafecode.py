@@ -1,9 +1,8 @@
-
 """
 Programa: cafecode.py
 Proyecto: CaféCode · sistema de la tostadora de café
-Autor: TU NOMBRE AQUÍ · Ficha 3601599
-Fecha: AAAA-MM-DD
+Autor: Juan Sebastián Matajira Orduz · Ficha 3601599
+Fecha: 2026-11-19
 Versión: 0.4
 Descripción: TU DESCRIPCIÓN AQUÍ (2 o 3 líneas: qué hace este programa)
 """
@@ -52,7 +51,11 @@ PRECIO_COMERCIAL = 26000
 #   lotes_especiales   -> 0      (contador: puntaje de 80 o más)
 # ---------------------------------------------------------------------
 # TU CÓDIGO AQUÍ
-
+ventas_registradas = 0 # (contador)
+total_vendido = 0 # (acumulador de pesos)
+libras_vendidas = 0.0 # (acumulador de libras)
+lotes_clasificados = 0 # (contador)
+lotes_especiales = 0 # (contador: puntaje de 80 o más)
 
 # ---------------------------------------------------------------------
 # 3. MENÚ PRINCIPAL · PARTE C
