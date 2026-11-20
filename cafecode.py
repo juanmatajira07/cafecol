@@ -10,10 +10,10 @@ Descripción: TU DESCRIPCIÓN AQUÍ (2 o 3 líneas: qué hace este programa)
 NOMBRE_TOSTADORA = "CaféCode · Tostadora de Café"
 ANCHO_RECIBO = 40
 PRECIO_LIBRA_ESPECIAL = 38000     # pesos por libra
-PRECIO_LIBRA_TRADICIONAL = 26000
+PRECIO_LIBRA_TRAD = 26000
 PORCENTAJE_DESCUENTO = 0.05       # descuento de temporada: 5 %
 LIBRAS_TABLA = 5                  # filas de la tabla de precios
-GRAMOS_POR_LIBRA=500
+GRAMOS_POR_LIBRA = 500
 PUNTAJE_MINIMO = 0
 PUNTAJE_MAXIMO = 100
 PUNTAJE_EXCEPCIONAL = 90
@@ -27,11 +27,11 @@ PRECIO_EXCELENTE = 45000
 PRECIO_ESPECIAL = 38000
 PRECIO_COMERCIAL = 26000
 
-ventas_registradas = 0 # (contador)
-total_vendido = 0 # (acumulador de pesos)
-libras_vendidas = 0.0 # (acumulador de libras)
-lotes_clasificados = 0 # (contador)
-lotes_especiales = 0 # (contador: puntaje de 80 o más)
+ventas_registradas = 0  # (contador)
+total_vendido = 0  # (acumulador de pesos)
+libras_vendidas = 0.0  # (acumulador de libras)
+lotes_clasificados = 0  # (contador)
+lotes_especiales = 0  # (contador: puntaje de 80 o más)
 
 opcion = ""
 while opcion != "0":
@@ -54,20 +54,20 @@ while opcion != "0":
                 nombre_cliente = input("Nombre del cliente: ").strip()
             texto = input("Libras de café especial: ").strip()
             texto = texto.replace(",", ".")
-            while not texto.replace(".", "",1).isdigit():
+            while not texto.replace(".", "", 1).isdigit():
                 print(" Error: escribe un número positivo, ej. 2,5.")
-                texto = input("Libras de café especial: " ).strip()
+                texto = input("Libras de café especial: ").strip()
                 texto = texto.replace(",", ".")
             libras_especial = float(texto)
             texto = input("Libras de café tradicional: ").strip()
             texto = texto.replace(",", ".")
-            while not texto.replace(".", "",1).isdigit():
+            while not texto.replace(".", "", 1).isdigit():
                 print(" Error: escribe un número positivo, ej. 2,5.")
-                texto = input("Libras de café tradicional: " ).strip()
+                texto = input("Libras de café tradicional: ").strip()
                 texto = texto.replace(",", ".")
             libras_tradicional = float(texto)
             subtotal_especial = libras_especial * PRECIO_LIBRA_ESPECIAL
-            subtotal_tradicional = libras_tradicional * PRECIO_LIBRA_TRADICIONAL
+            subtotal_tradicional = libras_tradicional * PRECIO_LIBRA_TRAD
             subtotal = subtotal_especial + subtotal_tradicional
             descuento = subtotal * PORCENTAJE_DESCUENTO
             total = subtotal - descuento
@@ -81,10 +81,10 @@ while opcion != "0":
             print("=" * ANCHO_RECIBO)
             print(f"Cliente: {nombre_cliente}")
 
-            especial_txt = f"${subtotal_especial:,.0f}".replace(",", ".")
-            lb_especial_txt = f"{libras_especial:.1f}".replace(".", ",")
-            tradicional_txt = f"${subtotal_tradicional:,.0f}".replace(",", ".")
-            lb_tradicional_txt = f"{libras_tradicional:.1f}".replace(".", ",")
+            spcl_txt = f"${subtotal_especial:,.0f}".replace(",", ".")
+            lb_spcl_txt = f"{libras_especial:.1f}".replace(".", ",")
+            trad_txt = f"${subtotal_tradicional:,.0f}".replace(",", ".")
+            lb_trad_txt = f"{libras_tradicional:.1f}".replace(".", ",")
             subtotal_txt = f"${subtotal:,.0f}".replace(",", ".")
             etiqueta_descuento = "Descuento (5%)"
             descuento_txt = f"-${descuento:,.0f}".replace(",", ".")
@@ -93,8 +93,8 @@ while opcion != "0":
             gramos_txt = f"{total_gramos:,.0f}".replace(",", ".")
             print("-" * ANCHO_RECIBO)
             print(f"{'Producto':<18}{"Libras":>8}{"Valor":>14}")
-            print(f"{'Café especial':<18}{lb_especial_txt:>8}{especial_txt:>14}")
-            print(f"{'Café tradicional':<18}{lb_tradicional_txt:>8}{tradicional_txt:>14}")
+            print(f"{'Café especial':<18}{lb_spcl_txt:>8}{spcl_txt:>14}")
+            print(f"{'Café tradicional':<18}{lb_trad_txt:>8}{trad_txt:>14}")
             print("-"*ANCHO_RECIBO)
             print(f"{'Subtotal':<26}{subtotal_txt:>14}")
             print(f"{etiqueta_descuento:<26}{descuento_txt:>14}")
@@ -109,7 +109,8 @@ while opcion != "0":
         case "2":
             codigo_lote = input("Código del lote: ").strip().upper()
             while True:
-                texto_puntaje = input("Puntaje de catación (0 a 100): ").strip()
+                texto_puntaje = input("Puntaje de catación (0 a 100): ")
+                texto_puntaje = texto_puntaje.strip()
                 texto_puntaje = texto_puntaje.replace(",", ".")
                 if not texto_puntaje.replace(".", "", 1).isdigit():
                     print("  Error: el puntaje es un número, ej. 86,5.")
@@ -117,15 +118,17 @@ while opcion != "0":
                 puntaje = float(texto_puntaje)
                 if PUNTAJE_MINIMO <= puntaje <= PUNTAJE_MAXIMO:
                     break
-                print("  Error: el puntaje debe estar entre 0 y 100.")
-            texto_humedad = input("Humedad del grano (%): ").strip().replace(",", ".")
-            opcion_tueste = input("Tueste (1 claro, 2 medio, 3 oscuro): ").strip()
+                print("Error: el puntaje debe estar entre 0 y 100.")
+            texto_humedad = input("Humedad del grano (%): ")
+            texto_humedad = texto_humedad.strip().replace(",", ".")
+            opcion_tueste = input("Tueste (1 claro, 2 medio, 3 oscuro):")
+            opcion_tueste = opcion_tueste.strip()
 
             mensaje_error = ""
             if codigo_lote == "":
                 mensaje_error = "el código del lote no puede estar vacío."
             elif not texto_puntaje.replace(".", "", 1).isdigit():
-                mensaje_error = "el puntaje debe ser un número positivo, ej. 86,5."
+                mensaje_error = "el puntaje debe ser un número positivo."
             elif not texto_humedad.replace(".", "", 1).isdigit():
                 mensaje_error = "la humedad debe ser un número"
             elif not PUNTAJE_MINIMO <= float(texto_puntaje) <= PUNTAJE_MAXIMO:
@@ -188,28 +191,29 @@ while opcion != "0":
                 print(f"{'Tueste:':<16}{tueste}")
                 print(f"{'Perfil:':<16}{perfil}")
                 print("=" * ANCHO_RECIBO)
-            if puntaje >=80:
-                lotes_especiales+=1
-            elif puntaje>0:
-                lotes_clasificados+=1
+            if puntaje >= 80:
+                lotes_especiales += 1
+            elif puntaje > 0:
+                lotes_clasificados += 1
 
         case "3":
             print(f"{'Libras':<8}{'Especial':>16}{'Tradicional':>16}")
-            # TU CÓDIGO AQUÍ
-            for libras in range(1,LIBRAS_TABLA+1):
-                PRECIO_LIBRA_ESPECIAL_TXT = f"{PRECIO_LIBRA_ESPECIAL*libras:,}".replace(",", ".")
-                PRECIO_LIBRA_TRADICIONAL_TXT = f"{PRECIO_LIBRA_TRADICIONAL*libras:,}".replace(",", ".")
-                print(f"{libras:<8}{PRECIO_LIBRA_ESPECIAL_TXT:>16}{PRECIO_LIBRA_TRADICIONAL_TXT:>16}")
+            for libras in range(1, LIBRAS_TABLA+1):
+                PRECIO_SPCL_TXT = f"{PRECIO_LIBRA_ESPECIAL*libras:,}"
+                PRECIO_SPCL_TXT = PRECIO_SPCL_TXT.replace(",", ".")
+                PRECIO_TRAD_TXT = f"{PRECIO_LIBRA_TRAD*libras:,}"
+                PRECIO_TRAD_TXT = PRECIO_TRAD_TXT.replace(",", ".")
+                print(f"{libras:<8}{PRECIO_SPCL_TXT:>16}{PRECIO_TRAD_TXT:>16}")
         case "4":
             if ventas_registradas == 0:
                 print("Todavia no hay movimientos hoy.")
             else:
-                total_promedio= total_vendido/ventas_registradas
+                total_promedio = total_vendido/ventas_registradas
                 total_vendido_txt = f"{total_vendido:,.0f}".replace(",", ".")
-                total_promedio_txt= f"{total_promedio:,.0f}".replace(",", ".")
-                libras_vendidas_txt= f"{libras_vendidas:.1f}".replace(".", ",")
+                total_promedio_txt = f"{total_promedio:,.0f}".replace(",", ".")
+                lb_vendidas_txt = f"{libras_vendidas:.1f}".replace(".", ",")
                 print(f"{'Ventas:':<16}{ventas_registradas}")
-                print(f"{'libras:':<16}{libras_vendidas_txt}")
+                print(f"{'libras:':<16}{lb_vendidas_txt}")
                 print(f"{'Total vendido:':<16}${total_vendido_txt}")
                 print(f"{'Total promedio:':<16}${total_promedio_txt}")
                 print(f"{'Lotes clasificados:':<16}{lotes_clasificados}")
