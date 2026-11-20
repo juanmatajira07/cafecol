@@ -103,7 +103,9 @@ while opcion != "0":
             print(f"Café entregado: {lb_total_txt} lb ({gramos_txt} g)")
             print("="*ANCHO_RECIBO)
             print('¡Gracias por apoyar el café de Caldas!')
-
+            libras_vendidas += total_libras
+            total_vendido += total
+            ventas_registradas += 1
         case "2":
             codigo_lote = input("Código del lote: ").strip().upper()
             while True:
@@ -199,15 +201,19 @@ while opcion != "0":
                 PRECIO_LIBRA_TRADICIONAL_TXT = f"{PRECIO_LIBRA_TRADICIONAL*libras:,}".replace(",", ".")
                 print(f"{libras:<8}{PRECIO_LIBRA_ESPECIAL_TXT:>16}{PRECIO_LIBRA_TRADICIONAL_TXT:>16}")
         case "4":
-            # ---------- PARTE G · RESUMEN DEL DÍA ----------
-            # Si no hay ventas ni lotes: «Todavía no hay movimientos hoy.»
-            # Si no: ventas, libras vendidas, total vendido, venta
-            # promedio (solo si hay ventas: no se divide entre cero),
-            # lotes clasificados y lotes especiales.
-            # TU CÓDIGO AQUÍ
-            print("Resumen del día: en construcción")
-
-        # TU CÓDIGO AQUÍ: case "0" y case _ (PARTE C)
+            if ventas_registradas == 0:
+                print("Todavia no hay movimientos hoy.")
+            else:
+                total_promedio= total_vendido/ventas_registradas
+                total_vendido_txt = f"{total_vendido:,.0f}".replace(",", ".")
+                total_promedio_txt= f"{total_promedio:,.0f}".replace(",", ".")
+                libras_vendidas_txt= f"{libras_vendidas:.1f}".replace(".", ",")
+                print(f"{'Ventas:':<16}{ventas_registradas}")
+                print(f"{'libras:':<16}{libras_vendidas_txt}")
+                print(f"{'Total vendido:':<16}${total_vendido_txt}")
+                print(f"{'Total promedio:':<16}${total_promedio_txt}")
+                print(f"{'Lotes clasificados:':<16}{lotes_clasificados}")
+                print(f"{'Lotes especiales:':<16}{lotes_especiales}")
         case "0":
             print("Cerrando CaféCode...")
         case _:
@@ -217,3 +223,6 @@ while opcion != "0":
 # Muestra «Ventas del día: N · Total: $X» y «¡Hasta pronto!»
 # ---------------------------------------------------------------------
 # TU CÓDIGO AQUÍ
+total_vendido_txt = f"{total_vendido:,.0f}".replace(",", ".")
+print(f"Ventas del día: {ventas_registradas} · Total: ${total_vendido_txt}")
+print("¡Hasta pronto!")
