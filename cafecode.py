@@ -105,20 +105,6 @@ while opcion != "0":
             print('¡Gracias por apoyar el café de Caldas!')
 
         case "2":
-            # ---------- PARTE E · CLASIFICAR LOTE ----------
-            # 1. Pide el código con el mismo patrón del nombre
-            #    (.strip().upper(); no puede quedar vacío).
-            # 2. El puntaje ya está resuelto con while True: continue
-            #    vuelve a preguntar y break sale cuando el dato sirve.
-            #    Quita los # del bloque del puntaje y haz el de la
-            #    humedad igual (número y no mayor que HUMEDAD_POSIBLE).
-            # 3. Copia la clasificación de clasificacion.py (if/elif/else)
-            #    y el estado de la humedad.
-            # 4. Suma 1 a lotes_clasificados y, si el puntaje es de 80
-            #    o más, suma 1 a lotes_especiales.
-            # 5. Muestra Lote, Puntaje SCA, Categoría, Precio por lb y
-            #    Estado con el patrón de fila f"{'Etiqueta:':<16}{valor}"
-            # TU CÓDIGO AQUÍ: código del lote
             codigo_lote = input("Código del lote: ").strip().upper()
             while True:
                 texto_puntaje = input("Puntaje de catación (0 a 100): ").strip()
@@ -130,8 +116,6 @@ while opcion != "0":
                 if PUNTAJE_MINIMO <= puntaje <= PUNTAJE_MAXIMO:
                     break
                 print("  Error: el puntaje debe estar entre 0 y 100.")
-                    
-            # TU CÓDIGO AQUÍ: humedad, clasificación, contadores y ficha
             texto_humedad = input("Humedad del grano (%): ").strip().replace(",", ".")
             opcion_tueste = input("Tueste (1 claro, 2 medio, 3 oscuro): ").strip()
 
@@ -208,15 +192,12 @@ while opcion != "0":
                 lotes_clasificados+=1
 
         case "3":
-            # ---------- PARTE F · TABLA DE PRECIOS ----------
-            # Con for libras in range(1, LIBRAS_TABLA + 1): muestra una
-            # fila por cada libra con el valor especial y el tradicional
-            # en pesos colombianos. Encabezado sugerido:
-            #   print(f"{'Libras':<8}{'Especial':>16}{'Tradicional':>16}")
+            print(f"{'Libras':<8}{'Especial':>16}{'Tradicional':>16}")
             # TU CÓDIGO AQUÍ
-            
-            print("Tabla de precios: en construcción")
-
+            for libras in range(1,LIBRAS_TABLA+1):
+                PRECIO_LIBRA_ESPECIAL_TXT = f"{PRECIO_LIBRA_ESPECIAL*libras:,}".replace(",", ".")
+                PRECIO_LIBRA_TRADICIONAL_TXT = f"{PRECIO_LIBRA_TRADICIONAL*libras:,}".replace(",", ".")
+                print(f"{libras:<8}{PRECIO_LIBRA_ESPECIAL_TXT:>16}{PRECIO_LIBRA_TRADICIONAL_TXT:>16}")
         case "4":
             # ---------- PARTE G · RESUMEN DEL DÍA ----------
             # Si no hay ventas ni lotes: «Todavía no hay movimientos hoy.»
