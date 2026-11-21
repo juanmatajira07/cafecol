@@ -222,11 +222,6 @@ while opcion != "0":
             print("Cerrando CaféCode...")
         case _:
             print("Opción no válida. Elige un número del menú.")
-# ---------------------------------------------------------------------
-# 4. CIERRE · PARTE G (se ejecuta una sola vez, al salir del ciclo)
-# Muestra «Ventas del día: N · Total: $X» y «¡Hasta pronto!»
-# ---------------------------------------------------------------------
-# TU CÓDIGO AQUÍ
 total_vendido_txt = f"{total_vendido:,.0f}".replace(",", ".")
 print(f"Ventas del día: {ventas_registradas} · Total: ${total_vendido_txt}")
 print("¡Hasta pronto!")
